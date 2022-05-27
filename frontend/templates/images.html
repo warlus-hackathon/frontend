@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for image in images %}
+            <div class="card" style="width:auto;">
+                <div class="card-body">
+                  <h6 class="card-title"> {{ image.name }}</h6>
+                  <h7 class="card-subtitle mb-2 text-muted"> {{ image.result_description }}</h7>
+                  <br>
+                  {% if image.obj_number != -1 %}
+                  <a href="#" class="card-link">Загрузить результат</a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <br>
+        <a href="{{ url_for('images.images') }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Обновить</a>
+        <a href="{{ url_for('index.index') }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Добавить изображение</a>
+
+{% endblock %} 
