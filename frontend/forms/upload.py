@@ -1,6 +1,6 @@
 import httpx
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
+from flask_wtf.file import FileAllowed, FileField, FileRequired
 from werkzeug.utils import secure_filename
 
 from frontend.config import config
@@ -9,7 +9,9 @@ upload_url = f'{config.endpoint}/upload/'
 
 
 class UploadFileForm(FlaskForm):
-    file = FileField()
+    file = FileField(
+        'File', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')]
+    )
 
     def upload_file(self) -> bool:
         file = self.file.data
