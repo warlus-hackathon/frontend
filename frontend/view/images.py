@@ -13,7 +13,7 @@ def images():
         if image['was_recognized'] == 0:
             image['result_description'] = 'Распознавание не выполнялось'
         elif image['was_recognized'] == 1:
-            image['result_description'] = 'На изображении обнаружено объектов:{obj_number}'.format(
+            image['result_description'] = 'Обнаружено объектов: {obj_number}'.format(
                 obj_number=image['obj_number'])
         else:
             image['result_description'] = 'При распознавании произошла ошибка'
@@ -27,3 +27,22 @@ def images():
 def delete(image_uid):
     appclient.images.delete(image_uid)
     return redirect(url_for('images.images'))
+
+
+@view.route('/result/<int:image_uid>/')
+def result(image_uid):
+    image = appclient.images.get_by_id(image_uid).dict()
+    if image['was_recognized'] == 0:
+        image['result_description'] = 'Распознавание не выполнялось'
+    elif image['was_recognized'] == 1:
+        image['result_description'] = 'Обнаружено объектов: {obj_number}'.format(obj_number=image['obj_number'])
+    else:
+        image['result_description'] = 'При распознавании произошла ошибка'
+    filename = image['name'].split('.')[0]
+    output_filename = f'{filename}_yolov3.jpg'
+    appclient.cloud.download_output_by_name(output_filename)
+    image_path = f'/../static/images/{output_filename}'
+    return render_template('result.html',
+                           image=image,
+                           path=image_path
+                           )

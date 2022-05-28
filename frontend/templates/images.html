@@ -9,7 +9,7 @@
                   <h7 class="card-subtitle mb-2 text-muted"> {{ image.result_description }}</h7>
                   <p> </p>
                   {% if image.was_recognized == 1 %}
-                  <a href="#" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Показать результат</a>
+                  <a href="{{ url_for('images.result', image_uid=image.uid) }}" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Показать результат</a>
                   {% endif %}
                   <p> </p>
                   <a href="{{ url_for('images.delete', image_uid=image.uid) }}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Удалить изображение</a>
