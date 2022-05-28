@@ -19,3 +19,7 @@ class ImageClient:
         res.raise_for_status()
         image = Image(**res.json())
         return image
+
+    def delete(self, image_id: int) -> None:
+        res = httpx.delete(f'{self.url}/{image_id}')
+        res.raise_for_status()

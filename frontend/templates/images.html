@@ -7,10 +7,12 @@
                 <div class="card-body">
                   <h6 class="card-title"> {{ image.name }}</h6>
                   <h7 class="card-subtitle mb-2 text-muted"> {{ image.result_description }}</h7>
-                  <br>
-                  {% if image.obj_number != -1 %}
-                  <a href="#" class="card-link">Загрузить результат</a>
+                  <p> </p>
+                  {% if image.was_recognized == 1 %}
+                  <a href="#" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Показать результат</a>
                   {% endif %}
+                  <p> </p>
+                  <a href="{{ url_for('images.delete', image_uid=image.uid) }}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Удалить изображение</a>
                 </div>
               </div>
             {% endfor %}
