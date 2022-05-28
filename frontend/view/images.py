@@ -27,3 +27,16 @@ def images():
 def delete(image_uid):
     appclient.images.delete(image_uid)
     return redirect(url_for('images.images'))
+
+
+@view.route('/result/<int:image_uid>/')
+def result(image_uid):
+    image = appclient.images.get_by_id(image_uid)
+    filename = image.dict()['name']
+    output_filename = f'{filename}_yolo3'
+    appclient.cloud.download_output_by_name(filename)
+
+    return render_template('result.html',
+                           image=image.dict(),
+                           path=f'file_storage/{output_filename}'
+                           )
