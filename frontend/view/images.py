@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 
 from frontend.client.api import appclient
 
@@ -21,3 +21,9 @@ def images():
         'images.html',
         images=images,
     )
+
+
+@view.route('/delete/<int:image_uid>/')
+def delete(image_uid):
+    appclient.images.delete(image_uid)
+    return redirect(url_for('images.images'))
