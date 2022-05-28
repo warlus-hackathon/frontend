@@ -10,7 +10,7 @@ upload_url = f'{config.endpoint}/upload/'
 
 class UploadFileForm(FlaskForm):
     file = FileField(
-        'File', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')]
+        'File', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg'], 'Images only!')]
     )
 
     def upload_file(self) -> bool:
