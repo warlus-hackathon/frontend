@@ -1,6 +1,10 @@
+import logging
+
 import httpx
 
 from frontend.schemas import Image
+
+logger = logging.getLogger(__name__)
 
 
 class ImageClient:
@@ -9,6 +13,7 @@ class ImageClient:
         self.url = f'{url}/images'
 
     def get_all(self) -> list[Image]:
+        logger.debug(f'{self.url}/\n\n')
         res = httpx.get(f'{self.url}/')
         res.raise_for_status()
         images = res.json()
