@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 def main():
     logger.info('application started')
     app = create_app()
-    app.run(port=config.web.port, host=config.web.host)
+    app.run(port=config.web.port, host=config.web.host, debug=config.web.debug)
 
 
 if __name__ == "__main__":

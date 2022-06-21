@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class WebAppConfig(BaseModel):
     port: str
     host: str
+    debug: bool
 
 
 class AwsConfig(BaseModel):
@@ -27,6 +28,7 @@ def load_from_env() -> AppConfig:
     endpoint = os.environ['ENDPOINT']
     app_port = os.environ['APP_PORT']
     app_host = os.environ['APP_HOST']
+    debug = os.getenv('DEBUG', 'False'),
     aws_endpoint = os.environ['AWS_ENDPOINT']
     aws_access_key_id = os.environ['AWS_ACCESS_KEY_ID']
     aws_secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -43,7 +45,7 @@ def load_from_env() -> AppConfig:
             bucket_output_images=aws_bucket_output_images,
             bucket_output_cvs=aws_bucket_output_cvs,
         ),
-        web=WebAppConfig(port=app_port, host=app_host)
+        web=WebAppConfig(port=app_port, host=app_host, debug=debug)
     )
 
 
