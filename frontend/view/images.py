@@ -35,7 +35,9 @@ def result(image_uid):
     if image['was_recognized'] == 0:
         image['result_description'] = 'Распознавание не выполнялось'
     elif image['was_recognized'] == 1:
-        image['result_description'] = 'Обнаружено объектов: {obj_number}'.format(obj_number=image['obj_number'])
+        image['result_description'] = 'Обнаружено объектов: {obj_number}'.format(
+            obj_number=image['obj_number']
+        )
     else:
         image['result_description'] = 'При распознавании произошла ошибка'
     filename = image['name'].split('.')[0]
