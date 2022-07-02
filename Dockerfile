@@ -10,5 +10,7 @@ COPY poetry.lock pyproject.toml /webapp/
 RUN poetry install --no-dev
 
 COPY frontend /webapp/frontend
+RUN mkdir /webapp/frontend/static
+RUN mkdir /webapp/frontend/static/images
 
 CMD ["python", "-m", "frontend"]
