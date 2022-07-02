@@ -26,9 +26,9 @@ class AppConfig(BaseModel):
 
 def load_from_env() -> AppConfig:
     endpoint = os.environ['ENDPOINT']
-    app_port = os.environ['APP_PORT']
-    app_host = os.environ['APP_HOST']
-    app_loglevel = os.environ.get('APP_LOGLEVEL', 'INFO').upper()
+    app_port = os.environ['FRONT_PORT']
+    app_host = os.environ['FRONT_HOST']
+    app_loglevel = os.environ.get('FRONT_LOGLEVEL', 'INFO').upper()
     aws_endpoint = os.environ['AWS_ENDPOINT']
     aws_access_key_id = os.environ['AWS_ACCESS_KEY_ID']
     aws_secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']
